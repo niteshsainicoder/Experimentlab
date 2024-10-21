@@ -40,7 +40,10 @@ function Eventlist({ Hoverdate, ClickDate }: { Hoverdate: string, ClickDate: str
   }
 
   useEffect(() => {
-    fetchEvents();
+    setTimeout(() => {
+      
+      fetchEvents();
+    }, 1500);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Authentication.logedin, Authentication.ProfileData._id])
