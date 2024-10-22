@@ -37,6 +37,12 @@ function Eventlist({ Hoverdate, ClickDate }: { Hoverdate: string, ClickDate: str
 
   }
 
+  
+  const sortedEvents =Authentication.ProfileData?.events.sort((a, b) => {
+    const dateA = a.Date.split('/').reverse().join('-');  // Convert 'DD/MM/YYYY' to 'YYYY-MM-DD'
+    const dateB = b.Date.split('/').reverse().join('-');
+    return new Date(dateA).getTime() - new Date(dateB).getTime();  // Compare the date objects
+  });
   useEffect(() => {
     if (Authentication.ProfileData._id !== ' ' && Authentication.logedin) {
 
@@ -52,7 +58,7 @@ function Eventlist({ Hoverdate, ClickDate }: { Hoverdate: string, ClickDate: str
   useEffect(() => {
 
     const ProfileData = localStorage.getItem('ProfileData');
-    
+
     if (ProfileData && JSON.parse(ProfileData).logedin) {
       setAuthentication(JSON.parse(ProfileData));
 
@@ -67,7 +73,7 @@ function Eventlist({ Hoverdate, ClickDate }: { Hoverdate: string, ClickDate: str
         <button type='button' onClick={() => setCreateevent(true)} className=' px-3 rounded-md max-h-7 bg-blue-800 text-white hover:bg-blue-600 border border-gray-800'>Add</button>
       </div>
       <div className=' flex flex-col gap-[2px] w-full h-full'>
-        {Authentication.ProfileData.events ? Authentication.ProfileData.events?.map((val, key) => (<Event key={key} _id={val._id} date={val.Date} ClickDate={ClickDate} Hoverdate={Hoverdate} PresentDate={formateDate(PresentDate)} title={val.Data} />
+        {Authentication.ProfileData.events ? sortedEvents?.map((val, key) => (<Event key={key} _id={val._id} date={val.Date} ClickDate={ClickDate} Hoverdate={Hoverdate} PresentDate={formateDate(PresentDate)} title={val.Data} />
         )) : Events?.map((val, key) => (<Event key={key} _id={val._id} date={val.Date} ClickDate={ClickDate} Hoverdate={Hoverdate} PresentDate={formateDate(PresentDate)} title={val.Data} />))}
       </div>
       {Createevent && <CreateEvent Date={formateDate(PresentDate)} ClickDate={ClickDate} setCreateEvent={setCreateevent} />}

@@ -20,13 +20,13 @@ export default function Home() {
 
 
   return (
-    <div className="p-4 w-screen h-screen max-h-fit flex bg-gray-200   justify-center  relative">
+    <div className=" w-full sm:w-screen h-full sm:h-screen max-h-full flex bg-gray-200    justify-center  relative">
       <Nav logedin={Authentication.logedin} setauth={setauth} />
-      <div className="w-full min-h-full max-h- flex p-4 items-center   justify-center">
-        <div className="w-1/2 flex  justify-center h-fit">
+      <div className="w-full min-h-screen max-h-full mt-32 sm:mt-0 gap-2 flex flex-col sm:flex-row px-4 items-center   justify-center">
+        <div className=" w-full sm:w-1/2 flex  justify-center h-fit">
           <MyCalendar setHoverdate={setHoverdate} ClickDate={ClickDate} setClickdate={setClickdate} />
         </div>
-        <div className="w-1/2 min-h-fit ">
+        <div className=" w-full sm:w-1/2 flex justify-center sm:flex-none  min-h-fit ">
           <Eventlist Hoverdate={HoverDate} ClickDate={ClickDate} />
         </div>
         {auth && <Form setauth={setauth} />}

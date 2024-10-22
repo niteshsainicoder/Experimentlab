@@ -60,7 +60,10 @@ export function CalendarProvider({ children }: { children: React.ReactNode }) {
             console.log('setted');
             
         }
+
     },[Authentication])
+
+ 
 
     return (
         <Calendar.Provider value={{  Authentication, setAuthentication }}>

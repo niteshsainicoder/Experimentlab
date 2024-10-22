@@ -68,12 +68,12 @@ export default function MyCalendar({ setHoverdate, setClickdate, ClickDate }: My
     }, [setHoverdate ]);
 
     return (
-        <div className="flex gap-4 flex-col">
-            <h1 className="text-xl font-semibold text-stone-600 antialiased">Selected Date for Event: <span className="font-medium font-stone-500">{ClickDate || formatDateToDDMMYYYY(calendarDate as Date)}</span></h1>
+        <div className="flex gap-4 relative flex-col">
+            <h1 className=" text-md text-center pl-6 -top-7 sm:text-xl font-semibold absolute max-w-full sm:-top-10 text-stone-600 antialiased">Selected Date for Event: <span className="font-medium font-stone-500">{ClickDate || formatDateToDDMMYYYY(calendarDate as Date)}</span></h1>
             <div>
                 <Calendar
                     value={calendarDate} // Ensure value is a Date object
-                    className="border-0 rounded-lg p-4 bg-gray-400"
+                    className="border-0 rounded-lg px-5 py-2  bg-gray-400 overflow-hidden border-gray-400 max-w-full "     
                 />
             </div>
         </div>
