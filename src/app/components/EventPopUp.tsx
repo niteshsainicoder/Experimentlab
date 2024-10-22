@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react'
 import { useCalendar } from './ContextApi'
+import AlertPopUp from './AlertPopUp';
 
 function EventPopUp({ data, setopen,_id , date }: { data: string, _id: string, date: string,setopen: (arg0: boolean) => void }) {
   const [update,setupdate] = useState<string>('');
@@ -47,8 +48,13 @@ const {Authentication,setAuthentication} = useCalendar();
           ProfileData: {
             ...Authentication.ProfileData,
             events: Authentication.ProfileData.events.map((val) => val._id === _id ? { ...val, Data: update } : val),
+
           },
         })
+        setupdate('Event updated successfully')
+        setTimeout(() => {
+          setupdate('')
+        }, 1500);
       }
     })
   }
@@ -63,8 +69,11 @@ const {Authentication,setAuthentication} = useCalendar();
           <button type='button' onClick={deleteEvent} className='p-1 px-3 rounded-md bg-red-700 text-white hover:bg-red-00'>Delete </button>
           <button type='button' onClick={updateEvent} className='p-1 px-3 rounded-md bg-neutral-900 text-white hover:bg-neutral-800'>Update </button>
         </div>
-        
+
       </div>
+      {
+        update == 'Event updated successfully' && <AlertPopUp Data={update} />
+      }
     </div>
   )
 }

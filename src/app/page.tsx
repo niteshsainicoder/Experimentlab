@@ -6,7 +6,6 @@ import Nav from "./components/navBar";
 import Eventlist from "./components/Eventlist";
 import { useCalendar } from "./components/ContextApi";
 import Form from "./components/Form";
-import AlertPopUp from "./components/AlertPopUp";
 
 
 
@@ -31,7 +30,6 @@ export default function Home() {
           <Eventlist Hoverdate={HoverDate} ClickDate={ClickDate} />
         </div>
         {auth && <Form setauth={setauth} />}
-        <AlertPopUp Data={'created suceefull'}/>
       </div>
     </div>
   );

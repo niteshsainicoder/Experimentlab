@@ -10,7 +10,7 @@ const [open,setopen] = useState(false)
       <h1 className={` min-w-40 text-center w-fit max-w-40   px-2`}>
         {date.toString()}
       </h1>
-      {title && <span className='w-full text-ellipsis'> {title} </span>}
+      {title && <span className='max-w-40 text-nowrap overflow-hidden text-ellipsis'> {title} </span>}
 
 
     </div>
