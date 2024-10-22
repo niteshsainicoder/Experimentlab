@@ -16,10 +16,10 @@ function CreateEvent({ Date, setCreateEvent, ClickDate }: { Date: string, ClickD
             },
             body: JSON.stringify({ ...data, UserID: Authentication.ProfileData._id }),
         }).then((res) => res.json()).then(res => {
-            console.log(res);
+            console.log(res,);
 
             if (res.message === 'Data saved successfully') {
-                setAuthentication({ logedin: true, ProfileData: { _id: Authentication.ProfileData._id, name: Authentication.ProfileData.name, email: Authentication.ProfileData.email, events: [...Authentication.ProfileData.events, { _id: res.Event._id, Date: res.Event.Date, Data: res.Event.Data }] } })
+                setAuthentication({ logedin: true, ProfileData: { _id: Authentication.ProfileData._id, name: Authentication.ProfileData.name, email: Authentication.ProfileData.email, events: [...Authentication.ProfileData?.events, { _id: res.Event._id, Date: res.Event.Date, Data: res.Event.Data }] } })
                 setCreateEvent(false);
             }
         })

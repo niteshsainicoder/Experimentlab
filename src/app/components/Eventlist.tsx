@@ -12,7 +12,7 @@ interface Event {
 
 function Eventlist({ Hoverdate, ClickDate }: { Hoverdate: string, ClickDate: string }) {
   const { Authentication, setAuthentication } = useCalendar();
-
+  const [Events, setEvents] = useState<Event[]>([]);
   const PresentDate: Date = new Date();
   const [Createevent, setCreateevent] = useState(false);
   const formateDate = (newValue: Date) => {
@@ -21,29 +21,30 @@ function Eventlist({ Hoverdate, ClickDate }: { Hoverdate: string, ClickDate: str
   };
 
   const fetchEvents = async () => {
-    if (Authentication.ProfileData._id !== '') {
+    await fetch(`/api/Data/getrecents?UserId=${Authentication.ProfileData._id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
 
+    }).then((res) => res.json()).then((res) => {
+      console.log(res);
 
-      await fetch(`/api/Data/getevents?UserId=${Authentication.ProfileData._id}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      setEvents(res.Event?.map((val: { _id: string, Date: string, Data: string }) => ({ _id: val._id, Date: val.Date, Data: val.Data })))
+      setAuthentication({ logedin: true, ProfileData: { _id: Authentication.ProfileData._id, name: Authentication.ProfileData.name, email: Authentication.ProfileData.email, events: res.Event?.map((val: { _id: string, Date: string, Data: string }) => ({ _id: val._id, Date: val.Date, Data: val.Data })) } })
 
-      }).then((res) => res.json()).then((res) => {
+    })
 
-    
-        setAuthentication({ logedin: true, ProfileData: { _id: Authentication.ProfileData._id, name: Authentication.ProfileData.name, email: Authentication.ProfileData.email, events: res.Event.map((val: { _id: string, Date: string, Data: string }) => ({ _id: val._id, Date: val.Date, Data: val.Data })) } })
-
-      })
-    }
   }
 
   useEffect(() => {
-    setTimeout(() => {
-      
-      fetchEvents();
-    }, 1500);
+    if (Authentication.ProfileData._id !== ' ') {
+
+      setTimeout(() => {
+
+        fetchEvents();
+      }, 1500);
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Authentication.logedin, Authentication.ProfileData._id])
@@ -57,8 +58,8 @@ function Eventlist({ Hoverdate, ClickDate }: { Hoverdate: string, ClickDate: str
         <button type='button' onClick={() => setCreateevent(true)} className=' px-3 rounded-md max-h-7 bg-blue-800 text-white hover:bg-blue-600 border border-gray-800'>Add</button>
       </div>
       <div className=' flex flex-col gap-[2px] w-full h-full'>
-        {Authentication.ProfileData.events.map((val, key) => (<Event key={key} _id={val._id} date={val.Date} ClickDate={ClickDate} Hoverdate={Hoverdate} PresentDate={formateDate(PresentDate)} title={val.Data} />
-        ))}
+        {Authentication.ProfileData.events ? Authentication.ProfileData.events?.map((val, key) => (<Event key={key} _id={val._id} date={val.Date} ClickDate={ClickDate} Hoverdate={Hoverdate} PresentDate={formateDate(PresentDate)} title={val.Data} />
+        )) : Events?.map((val, key) => (<Event key={key} _id={val._id} date={val.Date} ClickDate={ClickDate} Hoverdate={Hoverdate} PresentDate={formateDate(PresentDate)} title={val.Data} />))}
       </div>
       {Createevent && <CreateEvent Date={formateDate(PresentDate)} ClickDate={ClickDate} setCreateEvent={setCreateevent} />}
     </div>
