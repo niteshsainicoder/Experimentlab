@@ -63,6 +63,7 @@ const {Authentication,setAuthentication} = useCalendar();
           <button type='button' onClick={deleteEvent} className='p-1 px-3 rounded-md bg-red-700 text-white hover:bg-red-00'>Delete </button>
           <button type='button' onClick={updateEvent} className='p-1 px-3 rounded-md bg-neutral-900 text-white hover:bg-neutral-800'>Update </button>
         </div>
+        
       </div>
     </div>
   )
