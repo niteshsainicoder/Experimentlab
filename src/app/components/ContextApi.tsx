@@ -53,8 +53,15 @@ export function CalendarProvider({ children }: { children: React.ReactNode }) {
     });
 
 
-    useEffect(()=>{console.log(Authentication);
+    useEffect(()=>{
+        if (Authentication.logedin && Authentication.ProfileData._id !== '' && Authentication.ProfileData.events.length !== 0){ 
+         
+            localStorage.setItem('ProfileData', JSON.stringify(Authentication));
+            console.log('setted');
+            
+        }
     },[Authentication])
+
     return (
         <Calendar.Provider value={{  Authentication, setAuthentication }}>
             {children}

@@ -38,7 +38,7 @@ function Eventlist({ Hoverdate, ClickDate }: { Hoverdate: string, ClickDate: str
   }
 
   useEffect(() => {
-    if (Authentication.ProfileData._id !== ' ') {
+    if (Authentication.ProfileData._id !== ' ' && Authentication.logedin) {
 
       setTimeout(() => {
 
@@ -49,7 +49,16 @@ function Eventlist({ Hoverdate, ClickDate }: { Hoverdate: string, ClickDate: str
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Authentication.logedin, Authentication.ProfileData._id])
 
+  useEffect(() => {
 
+    const ProfileData = localStorage.getItem('ProfileData');
+    
+    if (ProfileData && JSON.parse(ProfileData).logedin) {
+      setAuthentication(JSON.parse(ProfileData));
+
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
 
     <div className='bg-gray-200 border-gray-300  caret-transparent rounded-md border-2 min-h-[315px] p-[2px] min-w-[300px] sm:max-w-[500px]'>

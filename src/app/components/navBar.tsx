@@ -8,6 +8,7 @@ const handleauth=()=>{
   if(logedin){
     setauth(false)
     setAuthentication({logedin:false,ProfileData:{_id:'',name:'',email:'',events:[{_id:'',Date:'',Data:''}]}});
+    localStorage.removeItem('ProfileData');
   }else{
     setauth(true)
   }

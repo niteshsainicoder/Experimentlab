@@ -9,7 +9,7 @@ interface MyCalendarProps {
 }
 
 export default function MyCalendar({ setHoverdate, setClickdate, ClickDate }: MyCalendarProps) {
-    const [calendarDate, setCalendarDate] = useState<Date | null>(new Date(ClickDate||'October 21 2024')); // Convert ClickDate string to Date
+    const [calendarDate, setCalendarDate] = useState<Date | null>(new Date(ClickDate||'October 01 2024')); // Convert ClickDate string to Date
 
     // Utility function to format date to DD/MM/YYYY
     const formatDateToDDMMYYYY = (date: Date) => {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import MyCalendar from "./components/Calendra";
 import Nav from "./components/navBar";
 import Eventlist from "./components/Eventlist";
@@ -16,9 +16,7 @@ export default function Home() {
   const [HoverDate, setHoverdate] = useState<string>('');
   const [ClickDate, setClickdate] = useState<string>('');
   const { Authentication } = useCalendar();
-  useEffect(() => {
-    console.log(HoverDate, auth, ClickDate, 'changed');
-  }, [HoverDate, ClickDate, auth])
+
 
 
   return (
